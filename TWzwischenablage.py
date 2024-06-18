@@ -8,7 +8,7 @@ def replace_date_in_text(text):
     # Aktuelles Datum im gewünschten Format
     current_date = datetime.now().strftime('%Y-%m-%d')
     
-    # Regex, um ein Datum im Format yyyy-mm-dd zu finden chatgpt zauber
+    # Regex, um ein Datum im Format yyyy-mm-dd zu finden
     date_pattern = r'\d{4}-\d{2}-\d{2}'
     
     # Ersetzen des Datums im Text
@@ -29,7 +29,14 @@ def monitor_clipboard():
                 print(f'Zwischenablage aktualisiert: {new_value}')
         time.sleep(1)
 
-if __name__ == "__main__":
-    monitor_clipboard()
+# Hauptfunktion, die das Überwachungs-Skript startet und neu startet bei Fehlern
+def main():
+    while True:
+        try:
+            monitor_clipboard()
+        except Exception as e:
+            print(f'Fehler aufgetreten: {e}. Neustart des Skripts in 5 Sekunden...')
+            time.sleep(5)
 
-    ## Datum in der zwischenablage immer auf das akutelle Datum
+if __name__ == "__main__":
+    main()
